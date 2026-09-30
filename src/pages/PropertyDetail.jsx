@@ -53,7 +53,7 @@ export default function PropertyDetail() {
         {/* Building characteristics */}
         <Card title="Building Characteristics">
           <Row label="Roof Type" value={p.roof} hint={p.roof === 'Flat' ? 'Highest wind-uplift vulnerability' : p.roof === 'Gable' ? 'Gable ends are a wind failure point' : 'Hip roof — best wind geometry'} />
-          <Row label="Construction Year" value={num(p.built)} hint={p.built < 1994 ? 'Predates post-Andrew building code' : p.built < 2002 ? 'Pre-2002 code' : 'Modern code era'} />
+          <Row label="Construction Year" value={p.built} hint={p.built < 1994 ? 'Predates post-Andrew building code' : p.built < 2002 ? 'Pre-2002 code' : 'Modern code era'} />
           <Row label="Opening Protection" value={p.protection} danger={p.protectionLevel === 'none'} warn={p.protectionLevel === 'partial'} />
         </Card>
       </div>
