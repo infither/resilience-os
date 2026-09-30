@@ -110,8 +110,8 @@ export default function PropertyDetail() {
 
 function Stat({ label, value, sub, danger }) {
   return (
-    <div className="rounded-xl border border-border bg-white p-4">
-      <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">{label}</div>
+    <div className="rounded-2xl border border-border bg-white p-4 shadow-card">
+      <div className="text-[11px] font-bold uppercase tracking-wide text-muted">{label}</div>
       <div className="mt-1.5 text-2xl font-extrabold" style={{ color: danger ? '#B91C1C' : '#1E3A8A' }}>
         {value}
       </div>
@@ -122,9 +122,9 @@ function Stat({ label, value, sub, danger }) {
 
 function Card({ title, right, children }) {
   return (
-    <div className="rounded-xl border border-border bg-white p-5">
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-sm font-bold uppercase tracking-wide text-ink">{title}</h3>
+    <div className="rounded-2xl border border-border bg-white p-6 shadow-card">
+      <div className="mb-4 flex items-center justify-between border-b border-border pb-3">
+        <div className="subhead">{title}</div>
         {right}
       </div>
       <div className="space-y-3.5">{children}</div>

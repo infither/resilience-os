@@ -18,34 +18,44 @@ export default function Mitigation() {
         Every property ranked by return on hardening investment — highest first. Start at the top.
       </p>
 
-      <div className="mt-8 space-y-3">
+      <div className="mt-8 space-y-4">
         {ranked.map((p, i) => {
           const hasWork = p.totalCapex > 0
+          const accent = !hasWork ? '#10B981' : p.highPriorityCount > 0 ? '#EF4444' : '#5D5FEF'
           return (
             <div
               key={p.id}
-              className="rounded-xl border border-border bg-white p-5 transition-shadow hover:shadow-md"
+              onClick={() => navigate(`/mitigation/${p.id}`)}
+              className="group flex cursor-pointer overflow-hidden rounded-2xl border border-border bg-white shadow-card transition-all hover:-translate-y-0.5 hover:shadow-cardhover"
             >
-              <div className="flex items-center gap-5">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
-                  {i + 1}
-                </div>
+              {/* accent stripe */}
+              <div className="w-1.5 shrink-0" style={{ background: accent }} />
 
+              <div className="flex flex-1 items-center gap-5 px-5 py-4">
+                {/* rank */}
+                <span
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-base font-extrabold text-white"
+                  style={{ background: accent }}
+                >
+                  {i + 1}
+                </span>
+
+                {/* name + roi bar */}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="truncate text-[15px] font-bold text-ink">{p.name}</h3>
+                    <h3 className="truncate text-[16px] font-extrabold text-ink group-hover:text-indigo">{p.name}</h3>
                     {hasWork && p.highPriorityCount > 0 && (
-                      <span className="rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-semibold text-danger">
+                      <span className="shrink-0 rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-extrabold text-danger">
                         {p.highPriorityCount} HIGH PRIORITY
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-muted">{p.city}</p>
+                  <p className="text-xs font-medium text-muted">{p.city}</p>
                   {hasWork && (
-                    <div className="mt-2 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-gray-100">
+                    <div className="mt-2 h-1.5 w-full max-w-[220px] overflow-hidden rounded-full bg-slate-100">
                       <div
-                        className="h-full rounded-full bg-highlight"
-                        style={{ width: `${Math.max(8, (p.roi / maxRoi) * 100)}%` }}
+                        className="h-full rounded-full"
+                        style={{ width: `${Math.max(8, (p.roi / maxRoi) * 100)}%`, background: accent }}
                       />
                     </div>
                   )}
@@ -53,25 +63,28 @@ export default function Mitigation() {
 
                 {hasWork ? (
                   <>
-                    <Metric label="Capex" value={money(p.totalCapex)} />
-                    <Metric label="Annual Savings" value={money(p.totalPremiumSavings)} accent="#10B981" />
-                    <Metric label="Payback" value={payback(p.payback)} />
-                    <Metric label="10-yr NPV" value={money(p.totalNpv, { compact: true })} accent="#1E3A8A" />
+                    {/* metric columns with dividers */}
+                    <div className="hidden items-stretch divide-x divide-border lg:flex">
+                      <Metric label="Capex" value={money(p.totalCapex)} />
+                      <Metric label="Annual Savings" value={money(p.totalPremiumSavings)} accent="#059669" />
+                      <Metric label="Payback" value={payback(p.payback)} />
+                      <Metric label="10-yr NPV" value={money(p.totalNpv, { compact: true })} accent="#1E3A8A" />
+                    </div>
                     <button
-                      onClick={() => navigate(`/mitigation/${p.id}`)}
-                      className="shrink-0 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-[0.98]"
+                      onClick={(e) => { e.stopPropagation(); navigate(`/mitigation/${p.id}`) }}
+                      className="shrink-0 rounded-xl bg-indigo px-4 py-2.5 text-sm font-bold text-white shadow-pill transition-all hover:brightness-105 active:scale-[0.98]"
                     >
                       View Roadmap →
                     </button>
                   </>
                 ) : (
                   <div className="flex items-center gap-3">
-                    <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-success">
+                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-success">
                       Well-hardened · no actions
                     </span>
                     <button
-                      onClick={() => navigate(`/mitigation/${p.id}`)}
-                      className="shrink-0 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-body transition-colors hover:bg-gray-50"
+                      onClick={(e) => { e.stopPropagation(); navigate(`/mitigation/${p.id}`) }}
+                      className="shrink-0 rounded-xl border border-border px-4 py-2.5 text-sm font-bold text-body transition-colors hover:bg-canvas"
                     >
                       View →
                     </button>
@@ -88,9 +101,9 @@ export default function Mitigation() {
 
 function Metric({ label, value, accent = '#0D1B2A' }) {
   return (
-    <div className="hidden w-24 shrink-0 text-right lg:block">
-      <div className="text-[10px] font-semibold uppercase tracking-wide text-muted">{label}</div>
-      <div className="mt-0.5 text-sm font-bold tabular-nums" style={{ color: accent }}>
+    <div className="w-28 px-4 text-right">
+      <div className="text-[10px] font-bold uppercase tracking-wide text-muted">{label}</div>
+      <div className="mt-0.5 text-[15px] font-extrabold tabular-nums" style={{ color: accent }}>
         {value}
       </div>
     </div>

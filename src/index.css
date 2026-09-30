@@ -27,21 +27,42 @@ body {
   box-sizing: border-box;
 }
 
-/* Section label: 24px rule above + 11px uppercase tracked label */
+/* Section label: rule above + uppercase tracked label */
 .section-label {
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #3b82f6;
+  letter-spacing: 0.14em;
+  color: #5d5fef;
 }
 .section-label::before {
   content: '';
   display: block;
-  width: 24px;
-  height: 2px;
-  background: #3b82f6;
-  margin-bottom: 10px;
+  width: 32px;
+  height: 3px;
+  border-radius: 999px;
+  background: #5d5fef;
+  margin-bottom: 12px;
+}
+
+/* Prominent in-card sub-heading: accent bar + bold dark label */
+.subhead {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0d1b2a;
+}
+.subhead::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 15px;
+  border-radius: 999px;
+  background: #5d5fef;
 }
 
 .headline {
