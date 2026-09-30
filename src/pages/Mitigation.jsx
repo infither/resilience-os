@@ -13,8 +13,7 @@ export default function Mitigation() {
   return (
     <Page>
       <SectionLabel>Mitigation</SectionLabel>
-      <h1 className="headline mt-3 text-3xl">A hardening roadmap that earns its keep at renewal.</h1>
-      <p className="mt-3 max-w-2xl text-[15px] text-body">
+      <p className="mt-4 max-w-2xl text-[15px] text-body">
         Every property ranked by return on hardening investment — highest first. Start at the top.
       </p>
 

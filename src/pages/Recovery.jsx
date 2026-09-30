@@ -10,10 +10,9 @@ export default function Recovery() {
   return (
     <Page>
       <SectionLabel>Recovery</SectionLabel>
-      <h1 className="headline mt-3 text-3xl">When it hits, recovery runs as a process — not panic.</h1>
 
       {/* Tabs */}
-      <div className="mt-6 inline-flex rounded-lg border border-border bg-gray-50 p-1">
+      <div className="mt-5 inline-flex rounded-lg border border-border bg-gray-50 p-1">
         <TabButton active={tab === 'pre'} onClick={() => setTab('pre')}>
           Pre-Loss Readiness
         </TabButton>

@@ -12,8 +12,7 @@ export default function Intelligence() {
   return (
     <Page>
       <SectionLabel>Risk Intelligence</SectionLabel>
-      <h1 className="headline mt-3 text-3xl">Every property scored by its real disaster exposure.</h1>
-      <p className="mt-3 max-w-2xl text-[15px] text-body">
+      <p className="mt-4 max-w-2xl text-[15px] text-body">
         Each building is rated on flood zone, wind exposure, and how much of its income — and its
         pre-loss record — is actually at risk. Ranked by business-interruption exposure.
       </p>
