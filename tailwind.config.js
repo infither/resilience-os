@@ -7,13 +7,16 @@ export default {
         navy: '#0D1B2A',
         primary: '#1E3A8A',
         highlight: '#3B82F6',
+        indigo: '#5D5FEF',
+        indigosoft: '#EEF0FF',
         muted: '#6B7280',
-        border: '#E5E7EB',
+        border: '#EDF0F5',
         success: '#10B981',
         warning: '#F59E0B',
         danger: '#EF4444',
         ink: '#0D1B2A',
         body: '#374151',
+        canvas: '#F5F6FA',
       },
       fontFamily: {
         sans: [
@@ -27,7 +30,12 @@ export default {
         ],
       },
       maxWidth: {
-        content: '1100px',
+        content: '1240px',
+      },
+      boxShadow: {
+        card: '0 4px 20px -4px rgba(20, 30, 60, 0.06)',
+        cardhover: '0 10px 30px -6px rgba(20, 30, 60, 0.12)',
+        pill: '0 8px 18px -6px rgba(93, 95, 239, 0.5)',
       },
       keyframes: {
         fadeIn: {
