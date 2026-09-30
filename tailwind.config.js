@@ -20,7 +20,7 @@ export default {
       },
       fontFamily: {
         sans: [
-          'Nunito',
+          'Inter',
           '-apple-system',
           'BlinkMacSystemFont',
           'Helvetica Neue',
