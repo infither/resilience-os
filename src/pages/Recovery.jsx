@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { PORTFOLIO } from '../data/portfolio'
-import { money, num } from '../utils/format'
 import { Page } from '../components/Layout'
-import { SectionLabel, CircularProgress, StatusPill } from '../components/Primitives'
+import { SectionLabel, CircularProgress } from '../components/Primitives'
 import FinancialRecovery from './FinancialRecovery'
 
 export default function Recovery() {
@@ -17,9 +16,6 @@ export default function Recovery() {
         <TabButton active={tab === 'pre'} onClick={() => setTab('pre')}>
           Pre-Loss Readiness
         </TabButton>
-        <TabButton active={tab === 'post'} onClick={() => setTab('post')}>
-          Post-Loss Workflow
-        </TabButton>
         <TabButton active={tab === 'financial'} onClick={() => setTab('financial')}>
           Financial Recovery
         </TabButton>
@@ -27,7 +23,6 @@ export default function Recovery() {
 
       <div className="mt-7">
         {tab === 'pre' && <PreLoss />}
-        {tab === 'post' && <PostLoss />}
         {tab === 'financial' && <FinancialRecovery />}
       </div>
     </Page>
@@ -142,189 +137,6 @@ function MiniRing({ value }) {
         strokeDashoffset={circ - (value / 100) * circ}
       />
     </svg>
-  )
-}
-
-/* ----------------------------- Post-Loss tab ----------------------------- */
-function PostLoss() {
-  const [track, setTrack] = useState('insurance')
-  // BI calc demo uses the highest-exposure property.
-  const biProperty = [...PORTFOLIO].sort((a, b) => b.biExposure - a.biExposure)[0]
-  const displacementMonths = 6
-
-  const insuranceSteps = [
-    {
-      title: 'File notice of loss',
-      status: 'Complete',
-      body: 'Notify your carrier within the policy window. ResilienceOS pre-fills the carrier contact template with your policy numbers and loss date.',
-      action: 'Open carrier template',
-    },
-    {
-      title: 'Document all damage',
-      status: 'In Progress',
-      body: 'Work the photo checklist and scope-of-loss template room by room. Pair each photo against your pre-loss record so nothing reads as “prior damage.”',
-      action: 'Open photo checklist',
-    },
-    {
-      title: 'Calculate Business Interruption',
-      status: 'In Progress',
-      body: 'bi',
-      action: null,
-    },
-    {
-      title: 'Compile claims package',
-      status: 'Not Started',
-      body: 'ResilienceOS has already built this from your pre-loss record — rent roll, insurance schedule, systems inventory, mitigation history, and dated photos in one package.',
-      action: 'Preview package',
-    },
-    {
-      title: 'Submit to broker / public adjuster',
-      status: 'Not Started',
-      body: 'Send the compiled package to your broker or public adjuster. A complete package is what moves a claim from “under review” to paid.',
-      action: 'Share package',
-    },
-    {
-      title: 'Track claim status',
-      status: 'Not Started',
-      body: 'Log carrier touchpoints, supplements, and payments in one timeline so nothing stalls silently.',
-      action: 'Open tracker',
-    },
-  ]
-
-  const govSteps = [
-    {
-      title: 'Register with FEMA Individual Assistance',
-      status: 'Not Started',
-      body: 'Register as soon as a federal disaster is declared for your county. Registration opens the door to every downstream program.',
-      action: 'fema.gov/disaster',
-      link: 'https://www.fema.gov/disaster',
-    },
-    {
-      title: 'Apply for SBA Disaster Loan',
-      status: 'Not Started',
-      body: 'Low-interest loans up to $2M for physical damage and economic injury — often the largest single source of recovery capital for an operator.',
-      action: 'sba.gov/disaster',
-      link: 'https://www.sba.gov/funding-programs/disaster-assistance',
-    },
-    {
-      title: 'Check FEMA HMGP eligibility',
-      status: 'Not Started',
-      body: 'Hazard Mitigation Grant Program funds post-disaster hardening — rebuild stronger than before with federal cost-share, not just back to baseline.',
-      action: 'Check eligibility',
-      link: 'https://www.fema.gov/grants/mitigation/hazard-mitigation',
-    },
-    {
-      title: 'Florida Division of Emergency Management',
-      status: 'Not Started',
-      body: 'State programs layer on top of federal aid. FDEM coordinates state mitigation and recovery funding for Florida property owners.',
-      action: 'floridadisaster.org',
-      link: 'https://www.floridadisaster.org',
-    },
-    {
-      title: 'Document all out-of-pocket costs',
-      status: 'In Progress',
-      body: 'Keep every receipt — temporary repairs, debris removal, generator fuel, tenant relocation. These are reimbursable but only if documented as they happen.',
-      action: 'Open expense log',
-    },
-    {
-      title: 'Track application status',
-      status: 'Not Started',
-      body: 'Federal and state timelines run in parallel with different deadlines. Track each application so you never miss a window.',
-      action: 'Open tracker',
-    },
-  ]
-
-  const steps = track === 'insurance' ? insuranceSteps : govSteps
-
-  return (
-    <div>
-      {/* track toggle */}
-      <div className="inline-flex rounded-lg border border-border bg-white p-1">
-        <TrackButton active={track === 'insurance'} onClick={() => setTrack('insurance')}>
-          Insurance Track
-        </TrackButton>
-        <TrackButton active={track === 'government'} onClick={() => setTrack('government')}>
-          Government Funding Track
-        </TrackButton>
-      </div>
-
-      <div className="mt-6 space-y-3">
-        {steps.map((s, i) => (
-          <div key={i} className="flex gap-4 rounded-xl border border-border bg-white p-5">
-            <div className="flex shrink-0 flex-col items-center">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
-                {i + 1}
-              </div>
-              {i < steps.length - 1 && <div className="mt-1 w-px flex-1 bg-border" />}
-            </div>
-
-            <div className="flex-1">
-              <div className="flex items-center justify-between gap-3">
-                <h4 className="text-[15px] font-bold text-ink">{s.title}</h4>
-                <StatusPill status={s.status} />
-              </div>
-
-              {s.body === 'bi' ? (
-                <BICalc property={biProperty} months={displacementMonths} />
-              ) : (
-                <p className="mt-1.5 text-[13px] leading-relaxed text-body">{s.body}</p>
-              )}
-
-              {s.action && (
-                s.link ? (
-                  <a
-                    href={s.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-[13px] font-semibold text-primary transition-colors hover:bg-blue-50"
-                  >
-                    {s.action} ↗
-                  </a>
-                ) : (
-                  <button className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-[13px] font-semibold text-primary transition-colors hover:bg-blue-50">
-                    {s.action} →
-                  </button>
-                )
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function BICalc({ property: p, months }) {
-  const total = p.units * p.rent * months
-  return (
-    <div className="mt-2">
-      <p className="text-[13px] leading-relaxed text-body">
-        Auto-calculated from your rent roll for <span className="font-semibold text-ink">{p.name}</span>{' '}
-        (highest-exposure property):
-      </p>
-      <div className="mt-2 inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg bg-gray-50 px-4 py-3 text-sm">
-        <span className="font-semibold text-ink">{num(p.units)} units</span>
-        <span className="text-muted">×</span>
-        <span className="font-semibold text-ink">{money(p.rent)}/mo</span>
-        <span className="text-muted">×</span>
-        <span className="font-semibold text-ink">{months} mo displacement</span>
-        <span className="text-muted">=</span>
-        <span className="text-lg font-extrabold text-primary">{money(total)}</span>
-      </div>
-    </div>
-  )
-}
-
-function TrackButton({ active, onClick, children }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`rounded-md px-4 py-2 text-sm font-semibold transition-all ${
-        active ? 'bg-primary text-white shadow-sm' : 'text-muted hover:text-ink'
-      }`}
-    >
-      {children}
-    </button>
   )
 }
 
