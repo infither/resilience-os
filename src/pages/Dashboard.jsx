@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { PORTFOLIO, PORTFOLIO_STATS, RISK_ORDER } from '../data/portfolio'
 import { money, num } from '../utils/format'
-import { CountUp, RiskPill } from '../components/Primitives'
+import { CountUp, RiskPill, StatCard } from '../components/Primitives'
 import { ExposureBarChart, RiskDonut } from '../components/Charts'
 import { Page } from '../components/Layout'
 import { exportSummaryPDF } from '../utils/pdf'
@@ -164,27 +164,6 @@ function CardHeader({ title, subtitle }) {
     <div>
       <h3 className="text-base font-extrabold text-ink">{title}</h3>
       {subtitle && <p className="mt-0.5 text-xs text-muted">{subtitle}</p>}
-    </div>
-  )
-}
-
-function StatCard({ cardBg, iconBg, icon, value, label, sub, subColor }) {
-  return (
-    <div
-      className="rounded-2xl p-5 shadow-card transition-transform hover:-translate-y-0.5"
-      style={{ background: cardBg }}
-    >
-      <span
-        className="flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-sm"
-        style={{ background: iconBg }}
-      >
-        {icon}
-      </span>
-      <div className="mt-4 text-[28px] font-extrabold leading-none text-ink">{value}</div>
-      <div className="mt-2 text-sm font-semibold text-ink">{label}</div>
-      <div className="mt-0.5 text-[11px] font-medium" style={{ color: subColor }}>
-        {sub}
-      </div>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { getProperty } from '../data/portfolio'
 import { money, moneyRange, payback, num } from '../utils/format'
 import { Page, Breadcrumb } from '../components/Layout'
-import { SectionLabel, PriorityPill } from '../components/Primitives'
+import { SectionLabel, PriorityPill, StatCard } from '../components/Primitives'
 
 const PRIORITY_ACCENT = { High: '#EF4444', Medium: '#F59E0B', Low: '#10B981' }
 
@@ -194,20 +194,15 @@ function HeadStat({ label, value, accent = '#0D1B2A' }) {
 
 function SummaryCard({ p }) {
   return (
-    <div className="mt-7 rounded-2xl bg-gradient-to-br from-[#1E3A8A] to-[#0D1B2A] p-7 shadow-card">
-      <div className="mb-5 flex items-center gap-2">
-        <span className="h-3 w-1 rounded-full bg-highlight" />
-        <span className="text-[12px] font-extrabold uppercase tracking-[0.14em] text-highlight">
-          Roadmap Summary
-        </span>
-      </div>
-      <div className="grid grid-cols-3 gap-x-6 gap-y-6">
-        <SumStat label="Total capex" value={money(p.totalCapex)} />
-        <SumStat label="Annual premium savings" value={money(p.totalPremiumSavings)} accent="#34D399" />
-        <SumStat label="Payback period" value={payback(p.payback)} />
-        <SumStat label="10-year NPV" value={money(p.totalNpv)} accent="#60A5FA" />
-        <SumStat label="Grant funding available" value={money(p.totalGrant)} accent="#34D399" />
-        <SumStat label="Net out-of-pocket after grants" value={money(p.netOutOfPocket)} />
+    <div className="mt-7">
+      <div className="mb-4 subhead">Roadmap Summary</div>
+      <div className="grid grid-cols-3 gap-5">
+        <StatCard cardBg="#F3E8FF" iconBg="#A855F7" icon={<WalletIcon />} value={money(p.totalCapex)} label="Total Capex" sub="Across all actions" subColor="#9333EA" />
+        <StatCard cardBg="#DCFCE7" iconBg="#22C55E" icon={<SavingsIcon />} value={money(p.totalPremiumSavings)} label="Annual Premium Savings" sub="Every year at renewal" subColor="#16A34A" />
+        <StatCard cardBg="#FFF4DE" iconBg="#FF947A" icon={<TimerIcon />} value={payback(p.payback)} label="Payback Period" sub="To recover the capex" subColor="#EA580C" />
+        <StatCard cardBg="#EEF0FF" iconBg="#5D5FEF" icon={<TrendIcon />} value={money(p.totalNpv)} label="10-Year NPV" sub="Net value created" subColor="#4F46E5" />
+        <StatCard cardBg="#CFFAFE" iconBg="#06B6D4" icon={<GiftIcon />} value={money(p.totalGrant)} label="Grant Funding Available" sub="FEMA / state cost-share" subColor="#0891B2" />
+        <StatCard cardBg="#F1F5F9" iconBg="#64748B" icon={<CoinsIcon />} value={money(p.netOutOfPocket)} label="Net Out-of-Pocket" sub="After grants applied" subColor="#475569" />
       </div>
     </div>
   )
@@ -249,12 +244,56 @@ function DetailBlock({ title, body }) {
   )
 }
 
-function SumStat({ label, value, accent = '#FFFFFF' }) {
+/* --- summary stat-card icons (inherit white via currentColor) --- */
+function WalletIcon() {
   return (
-    <div>
-      <div className="text-[11px] font-semibold uppercase tracking-wide text-white/55">{label}</div>
-      <div className="mt-1 text-2xl font-extrabold" style={{ color: accent }}>{value}</div>
-    </div>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 7a2 2 0 0 1 2-2h13a1 1 0 0 1 1 1v2" />
+      <path d="M3 7v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-3" />
+      <path d="M21 12h-5a2 2 0 0 0 0 4h5v-4z" />
+    </svg>
+  )
+}
+function SavingsIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3v12" />
+      <path d="M7 10l5 5 5-5" />
+      <path d="M4 20h16" />
+    </svg>
+  )
+}
+function TimerIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="13" r="8" />
+      <path d="M12 9v4l2.5 2.5M9 2h6" />
+    </svg>
+  )
+}
+function TrendIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 17l6-6 4 4 7-7" />
+      <path d="M14 8h6v6" />
+    </svg>
+  )
+}
+function GiftIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="8" width="18" height="4" rx="1" />
+      <path d="M12 8v13M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
+      <path d="M12 8S10 3 7.5 4.5 9.5 8 12 8zM12 8s2-5 4.5-3.5S14.5 8 12 8z" />
+    </svg>
+  )
+}
+function CoinsIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="8" cy="8" r="5" />
+      <path d="M18.09 10.37A5 5 0 1 1 15 20M7 6h1v4M16.71 13.88l.7.71-2.82 2.82" />
+    </svg>
   )
 }
 

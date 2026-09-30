@@ -6,6 +6,28 @@ export function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
 }
 
+// Pastel stat card with a colored icon tile — the shared dashboard/summary format.
+export function StatCard({ cardBg, iconBg, icon, value, label, sub, subColor }) {
+  return (
+    <div
+      className="rounded-2xl p-5 shadow-card transition-transform hover:-translate-y-0.5"
+      style={{ background: cardBg }}
+    >
+      <span
+        className="flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-sm"
+        style={{ background: iconBg }}
+      >
+        {icon}
+      </span>
+      <div className="mt-4 text-[28px] font-extrabold leading-none text-ink">{value}</div>
+      <div className="mt-2 text-sm font-semibold text-ink">{label}</div>
+      <div className="mt-0.5 text-[11px] font-medium" style={{ color: subColor }}>
+        {sub}
+      </div>
+    </div>
+  )
+}
+
 // Color-coded risk pill.
 export function RiskPill({ level, size = 'md' }) {
   const c = RISK_COLORS[level] || RISK_COLORS.Medium
