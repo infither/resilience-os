@@ -202,7 +202,7 @@ function SummaryCard({ p }) {
         <StatCard cardBg="#FFF4DE" iconBg="#FF947A" icon={<TimerIcon />} value={payback(p.payback)} label="Payback Period" sub="To recover the capex" subColor="#EA580C" />
         <StatCard cardBg="#EEF0FF" iconBg="#5D5FEF" icon={<TrendIcon />} value={money(p.totalNpv)} label="10-Year NPV" sub="Net value created" subColor="#4F46E5" />
         <StatCard cardBg="#CFFAFE" iconBg="#06B6D4" icon={<GiftIcon />} value={money(p.totalGrant)} label="Grant Funding Available" sub="FEMA / state cost-share" subColor="#0891B2" />
-        <StatCard cardBg="#F1F5F9" iconBg="#64748B" icon={<CoinsIcon />} value={money(p.netOutOfPocket)} label="Net Out-of-Pocket" sub="After grants applied" subColor="#475569" />
+        <StatCard cardBg="#FFE2E5" iconBg="#FA5A7D" icon={<CoinsIcon />} value={money(p.netOutOfPocket)} label="Net Out-of-Pocket" sub="After grants applied" subColor="#E11D48" />
       </div>
     </div>
   )
