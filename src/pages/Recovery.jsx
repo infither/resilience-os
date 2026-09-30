@@ -3,6 +3,7 @@ import { PORTFOLIO } from '../data/portfolio'
 import { money, num } from '../utils/format'
 import { Page } from '../components/Layout'
 import { SectionLabel, CircularProgress, StatusPill } from '../components/Primitives'
+import FinancialRecovery from './FinancialRecovery'
 
 export default function Recovery() {
   const [tab, setTab] = useState('pre')
@@ -19,10 +20,15 @@ export default function Recovery() {
         <TabButton active={tab === 'post'} onClick={() => setTab('post')}>
           Post-Loss Workflow
         </TabButton>
+        <TabButton active={tab === 'financial'} onClick={() => setTab('financial')}>
+          Financial Recovery
+        </TabButton>
       </div>
 
       <div className="mt-7">
-        {tab === 'pre' ? <PreLoss /> : <PostLoss />}
+        {tab === 'pre' && <PreLoss />}
+        {tab === 'post' && <PostLoss />}
+        {tab === 'financial' && <FinancialRecovery />}
       </div>
     </Page>
   )
