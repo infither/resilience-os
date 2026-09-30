@@ -14,13 +14,12 @@ body,
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
-    'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #ffffff;
   color: #0d1b2a;
-  letter-spacing: -0.011em;
 }
 
 * {

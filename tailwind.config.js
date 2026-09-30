@@ -20,10 +20,9 @@ export default {
       },
       fontFamily: {
         sans: [
+          'Nunito',
           '-apple-system',
           'BlinkMacSystemFont',
-          'SF Pro Text',
-          'SF Pro Display',
           'Helvetica Neue',
           'Arial',
           'sans-serif',
