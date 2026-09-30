@@ -135,13 +135,13 @@ export function computeFinancials(property, scenarioKey, files) {
   const grantsBase = hmgpBase + 50000 + 25000 // HMGP + HLMP + county
   const grantsAvailable = r5(grantsBase * grantAccess)
 
-  // Waterfall (order of money: Insurance -> Loans -> Grants)
+  // Waterfall (order of money: Insurance -> Grants -> Loans)
   const insApplied = Math.min(insuranceRecovery, grossLoss)
   let rem = grossLoss - insApplied
-  const loansApplied = Math.min(loanCapacity, rem)
-  rem -= loansApplied
   const grantsApplied = Math.min(grantsAvailable, rem)
   rem -= grantsApplied
+  const loansApplied = Math.min(loanCapacity, rem)
+  rem -= loansApplied
   const unfundedGap = Math.max(0, r5(rem))
   const fundingApplied = loansApplied + grantsApplied
 

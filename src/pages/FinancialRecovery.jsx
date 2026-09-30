@@ -73,12 +73,12 @@ export default function FinancialRecovery() {
           <span className="subhead mr-2">Order of Money</span>
           <OrderStep n="1" label="Insurance" color="#10B981" />
           <Arrow />
-          <OrderStep n="2" label="Loans" color="#3B82F6" />
+          <OrderStep n="2" label="Grants" color="#A855F7" />
           <Arrow />
-          <OrderStep n="3" label="Grants" color="#A855F7" />
+          <OrderStep n="3" label="Loans" color="#3B82F6" />
         </div>
         <p className="mt-3 text-[13px] text-body">
-          Insurance proceeds reduce what loans and grants will cover, so sequence matters.
+          Insurance and grants are money you keep; loans only cover what's left — so sequence matters.
         </p>
       </div>
 
@@ -449,10 +449,10 @@ function Waterfall({ fin }) {
   let run = fin.grossLoss
   cols.push({ label: '– Insurance', top: y(run), bottom: y(run - fin.insApplied), color: '#10B981', value: fin.insApplied })
   run -= fin.insApplied
-  cols.push({ label: '– Loans', top: y(run), bottom: y(run - fin.loansApplied), color: '#3B82F6', value: fin.loansApplied })
-  run -= fin.loansApplied
   cols.push({ label: '– Grants', top: y(run), bottom: y(run - fin.grantsApplied), color: '#A855F7', value: fin.grantsApplied })
   run -= fin.grantsApplied
+  cols.push({ label: '– Loans', top: y(run), bottom: y(run - fin.loansApplied), color: '#3B82F6', value: fin.loansApplied })
+  run -= fin.loansApplied
   cols.push({ label: 'Unfunded Gap', top: y(fin.unfundedGap), bottom: y0, color: fin.unfundedGap > 0 ? '#EF4444' : '#10B981', value: fin.unfundedGap })
 
   const n = cols.length
