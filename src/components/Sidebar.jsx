@@ -20,13 +20,8 @@ export default function Sidebar({ onLogout }) {
         <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo shadow-pill">
           <Shield size={22} color="#FFFFFF" />
         </span>
-        <div>
-          <div className="text-[18px] font-extrabold leading-none tracking-tight text-ink">
-            Resilience<span className="text-indigo">OS</span>
-          </div>
-          <div className="mt-1 text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
-            Protect what matters
-          </div>
+        <div className="text-[19px] font-extrabold leading-none tracking-tight text-ink">
+          Resilience<span className="text-indigo">OS</span>
         </div>
       </button>
 

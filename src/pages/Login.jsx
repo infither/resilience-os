@@ -28,11 +28,11 @@ export default function Login({ onLogin }) {
 
       <div className="relative w-full max-w-sm animate-fadeIn">
         <div className="mb-8 flex flex-col items-center text-center">
-          <Shield size={52} />
-          <h1 className="mt-4 text-2xl font-extrabold tracking-tight text-white">
+          <Shield size={80} />
+          <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-white">
             Resilience<span className="text-highlight">OS</span>
           </h1>
-          <p className="mt-1.5 text-sm text-white/55">Protect what matters.</p>
+          <p className="mt-3 text-lg text-white/60">Protect what matters.</p>
         </div>
 
         <form
