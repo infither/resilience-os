@@ -20,7 +20,7 @@ export default {
       },
       fontFamily: {
         sans: [
-          'Inter',
+          'Manrope',
           '-apple-system',
           'BlinkMacSystemFont',
           'Helvetica Neue',
