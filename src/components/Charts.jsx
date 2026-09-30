@@ -44,7 +44,7 @@ export function ExposureBarChart() {
         return (
           <g key={i}>
             <line x1={padL} y1={y} x2={W - 10} y2={y} stroke="#EDF0F5" strokeWidth="1" />
-            <text x={padL - 8} y={y + 3} textAnchor="end" fontSize="9" fill="#9CA3AF">
+            <text x={padL - 8} y={y + 3} textAnchor="end" fontSize="9.5" fontWeight="600" fill="#0D1B2A">
               {money(v, { compact: true })}
             </text>
           </g>
@@ -59,7 +59,7 @@ export function ExposureBarChart() {
         return (
           <g key={d.id}>
             <rect x={x} y={y} width={barW} height={h} rx="6" fill="url(#barGrad)" />
-            <text x={x + barW / 2} y={H - 10} textAnchor="middle" fontSize="9" fill="#9CA3AF">
+            <text x={x + barW / 2} y={H - 10} textAnchor="middle" fontSize="9.5" fontWeight="600" fill="#0D1B2A">
               {SHORT[d.id]}
             </text>
           </g>
@@ -122,8 +122,8 @@ export function RiskDonut() {
         {segments.map((s) => (
           <div key={s.label} className="flex items-center gap-2.5">
             <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: s.color }} />
-            <span className="text-sm font-semibold text-ink">{s.value}</span>
-            <span className="text-sm text-muted">{s.label}</span>
+            <span className="text-sm font-bold text-ink">{s.value}</span>
+            <span className="text-sm font-medium text-ink">{s.label}</span>
           </div>
         ))}
       </div>
